@@ -7,11 +7,16 @@ import { Error, Loader, SongCard } from '../components';
 const AroundYou = () => {
   const [country, setCountry] = useState('');
   const [loading, setLoading] = useState(true);
-    const { activeSong, isPlaying } = useSelector((state) => state.player);
-    
-    useEffect(() => {
+  const { activeSong, isPlaying } = useSelector((state) => state.player);
 
-    }, [country]);
+  console.log(country);
+
+  useEffect(() => {
+    axios.get('https://geo.ipify.org/api/v1?apiKey=at_nkhsjdCt6mf1Noge8Whmpa7tVQrSx')
+      .then((res) => setCountry(res?.data?.location?.country))
+      .catch((err) => console.log(err))
+      .finally(() => setLoading((false)));
+  }, [country]);
 
   return (
     <div />
